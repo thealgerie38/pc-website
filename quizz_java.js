@@ -1,3 +1,6 @@
+
+
+
 const els ={
     welcomeScreen: null,
     questionScreen: null,
@@ -9,9 +12,11 @@ const els ={
 };
 
 
+
+
 let questionIndex = 0;
 
-
+// affichage des questions et affectation de valeur en fonction de la reponse
 
 const question = [{
         question: 'Un ordinateur peut fonctionner sans carte mere ?'.
@@ -51,6 +56,12 @@ const question = [{
     };
 ];
 
+
+
+
+// changement de page et de question
+
+
 const recordedQuestions = [];
 
 
@@ -69,22 +80,35 @@ const init = () => {
         displayQuestion(questionIndex);
     });
 
-els.answersContainers.addEventListener('click', ((target))=>{
-    if (target.tagName!=='LI'){
-        return;
-    }
-    const result = target.getAttribute('data-result')
-    recordedAnswers.push(result);
+    els.endBtn.addEventListener("click",()=>{
+        displayScreen('welcome');
+        questionIndex = 0;
+    });
+    
+    
+    els.answersContainers.addEventListener('click', ((target)) => {
+        if (target.tagName!=='LI'){
+            return;
+        }
+        const result = target.getAttribute('data-result')
+        recordedAnswers.push(result);
 
-    questionIndex++;
+        questionIndex++;
 
-    if (questionIndex >= question.lenght) {
-        calculateScore();
-        displayScreen('end');
-    } else {
-        displayQuestion(questionIndex);
-    }
-});
+        if (questionIndex >= question.lenght) {
+            calculateScore();
+            displayScreen('end');
+        } else {
+            displayQuestion(questionIndex);
+        }
+    });
+
+}
+
+
+// calcul du score moyen 
+
+
 
 
 const calculateScore = () => {
@@ -99,7 +123,11 @@ const calculateScore = () => {
 
 
 
-};
+
+
+
+
+// changement d'affichage de l'ecriture de la question et de la liste
 
 const displayQuestion =(index)=>{
 
@@ -111,7 +139,7 @@ const displayQuestion =(index)=>{
     const questionEl= els.questionScreen.querySelector('h2');
     els.answersContainer = els.questionScreen.querySelector('ul');
 
-    const answerEls =currentQuestion.answers.map((answer)) =>{
+    const answerEls =currentQuestion.answers.map((answer)) => {
         const liEl = document.createElement('li');
         liEl.textContent = answer.title;
         liEl.setAttribute('data-result', answer.result);
@@ -123,6 +151,9 @@ const displayQuestion =(index)=>{
     els.answersContainers.textContent = '';
     els.answersContainers.append(...answerEls);
 };
+
+
+// fonction de changement d'etat de screen
 
 
 const displayScreen = (screenName) => {
