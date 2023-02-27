@@ -14,12 +14,12 @@ const els ={
 
 
 
-let questionIndex = 0;
+let questionIndex = 0,
 
 // affichage des questions et affectation de valeur en fonction de la reponse
 
 const question = [{
-        question: 'Un ordinateur peut fonctionner sans carte mere ?'.
+        question: 'Un ordinateur peut fonctionner sans carte mere ?',
         answers: [{
             title: 'vrai',
             result: 'vrai'
@@ -29,9 +29,9 @@ const question = [{
         }]
         
 
-    };
+    },
     {
-        question: 'La carte mere est consideree comme ?'.
+        question: 'La carte mere est consideree comme ?',
         answers: [{
             title: 'le coeur de l ordinateur',
             result: 'vrai'
@@ -41,9 +41,9 @@ const question = [{
         }]
             
 
-    };
+    },
     {
-        question: 'tout les processeurs sont compatibles avec chaque cartes mere?'.
+        question: 'tout les processeurs sont compatibles avec chaque cartes mere?',
         answers: [{
             title: 'vrai',
             result: 'vrai'
@@ -53,7 +53,7 @@ const question = [{
         }]
             
 
-    };
+    },
 ];
 
 
@@ -66,44 +66,43 @@ const recordedQuestions = [];
 
 
 const init = () => {
-    console.log('init');
+    console.log('init'),
 
-    els.welcomeScreen = document.querySelector(".welcome-screen");
-    els.questionScreen = document.querySelector(".question-screen");
-    els.endScreen = document.querySelector(".end-screen");
-    els.welcomeBtn = els.welcomeScreen.querySelector('button');
-    els.endBtn = els.endScreen.querySelector('button');
-    els.answersContainers = els.questionScreen.querySelector('ul');
-
+    els.welcomeScreen = document.querySelector(".welcome-screen"),
+    els.questionScreen = document.querySelector(".question-screen"),
+    els.endScreen = document.querySelector(".end-screen"),
+    els.welcomeBtn = els.welcomeScreen.querySelector('button'),
+    els.endBtn = els.endScreen.querySelector('button'),
+    els.answersContainers = els.questionScreen.querySelector('ul'),
     els.welcomeBtn.addEventListener("click",()=>{
         displayScreen('question');
         displayQuestion(questionIndex);
-    });
+    }),
 
     els.endBtn.addEventListener("click",()=>{
-        displayScreen('welcome');
-        questionIndex = 0;
+        displayScreen('welcome'),
+        questionIndex = 0.
     });
     
     
-    els.answersContainers.addEventListener('click', ((target)) => {
+    els.answersContainers.addEventListener('click', ((target))=>{
         if (target.tagName!=='LI'){
             return;
-        }
+        };
         const result = target.getAttribute('data-result')
         recordedAnswers.push(result);
 
         questionIndex++;
 
         if (questionIndex >= question.lenght) {
-            calculateScore();
+            calculateScore(),
             displayScreen('end');
         } else {
             displayQuestion(questionIndex);
-        }
+        };
     });
 
-}
+};
 
 
 // calcul du score moyen 
@@ -143,9 +142,9 @@ const displayQuestion =(index)=>{
         const liEl = document.createElement('li');
         liEl.textContent = answer.title;
         liEl.setAttribute('data-result', answer.result);
-        return liEl
+        return liEl;
 
-    }
+    };
 
     questionEl.textContent = currentQuestion.question;
     els.answersContainers.textContent = '';
@@ -168,11 +167,3 @@ const displayScreen = (screenName) => {
 
 
 window.addEventListener('load',init);
-
-
-
-
-
-
-
-
